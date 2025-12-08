@@ -1,0 +1,18 @@
+# Computer Vision Safety Grid
+
+**Role:** Frontend Architect | **Tech Stack:** HTML5 Canvas, WebSockets, React
+
+## The Challenge
+Industrial safety monitoring required visualizing multiple live video feeds and overlaying AI-detected hazard bounding boxes in real-time without browser lag.
+
+## The Solution
+Built a **High-Performance Safety Dashboard** capable of rendering complex visual data at 60fps.
+
+### Key Innovations
+- **Live Canvas API Rendering**: Bypassed standard DOM manipulation for rendering thousands of dynamic bounding boxes directly on the GPU-accelerated Canvas.
+- **WebSockets**: Established persistent, bi-directional connections for millisecond-latency alert delivery.
+- **Low-Latency Streaming**: Optimized video stream buffering for near-real-time synchronization with AI inference data.
+
+## Impact
+- **Zero-Lag Visualization**: Achieved smooth 60fps rendering of multi-feed hazard detection.
+- **Enhanced Safety**: Provided operators with instantaneous visual feedback on potential safety violations.
