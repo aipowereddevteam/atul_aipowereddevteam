@@ -6,19 +6,19 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Atul Nagose | Full Stack Systems Architect",
-  description: "Senior Engineer specializing in High-Scale IoT, AWS Infrastructure, and Real-Time Logistics Systems.",
-  keywords: ["Next.js Developer", "AWS Architect", "Freelance React Developer", "IoT Specialist"],
+  title: "AI Powered Dev | AI Automation & Development Services",
+  description: "Transform your business with AI-powered automation, web development, and mobile apps. Specialized AI solutions for modern businesses in India.",
+  keywords: ["AI Automation", "Web Development", "Mobile App Development", "AI Solutions India", "Business Automation"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Atul Nagose",
-    "jobTitle": "Senior Software Engineer",
-    "knowsAbout": ["AWS EC2", "Redis Caching", "GraphQL", "Real-time Systems"],
-    "url": "https://your-domain.com"
+    "@type": "Organization",
+    "name": "AI Powered Dev Team",
+    "description": "AI Development & Automation Specialists",
+    "knowsAbout": ["AI Automation", "Web Development", "Mobile Apps", "Business Intelligence"],
+    "url": "https://aipowereddev.in"
   };
 
   return (
