@@ -5,7 +5,7 @@ import { Layers, Cpu, Smartphone } from "lucide-react";
 
 export const Services = () => {
     return (
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-32 lg:py-40 relative overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -19,8 +19,10 @@ export const Services = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-[500px]">
                     {/* Service 1: Cloud Architecture (Large Left) */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                         className="lg:col-span-2 bg-[#0a0f1a] border border-white/5 rounded-3xl p-10 relative overflow-hidden group"
                     >
                         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />
@@ -50,9 +52,10 @@ export const Services = () => {
 
                         {/* Service 2: AI */}
                         <motion.div
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: 40 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ delay: 0.15, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                             className="flex-1 bg-[#0a0f1a] border border-white/5 rounded-3xl p-8 relative overflow-hidden group"
                         >
                             <div className="absolute bottom-0 left-0 w-40 h-40 bg-purple-500/10 rounded-full blur-[60px] translate-y-1/2 -translate-x-1/2" />
@@ -73,9 +76,10 @@ export const Services = () => {
 
                         {/* Service 3: Mobile */}
                         <motion.div
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: 40 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ delay: 0.3, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                             className="flex-1 bg-[#0a0f1a] border border-white/5 rounded-3xl p-8 relative overflow-hidden group"
                         >
                             <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/10 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2" />

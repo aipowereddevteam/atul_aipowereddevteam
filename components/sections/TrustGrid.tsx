@@ -32,15 +32,16 @@ const stats = [
 
 export const TrustGrid = () => {
     return (
-        <section className="py-10 relative z-20">
+        <section className="py-20 lg:py-28 relative z-20">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 50 }}
+                            initial={{ opacity: 0, y: 60 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ delay: index * 0.15, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                             whileHover={{ y: -10 }}
                             className="bg-[#0a0f1a] border border-white/10 p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center text-center group"
                         >

@@ -1,9 +1,66 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, Send, MessageSquare, Calendar } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare, Calendar, ArrowRight, CheckCircle } from "lucide-react";
 
 export const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        message: ""
+    });
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // Prepare WhatsApp message
+        const whatsappMessage = `Hi! I'm ${formData.name} from ${formData.company}.
+
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+Message:
+${formData.message}
+
+I'd like to schedule a free consultation to discuss my project.`;
+
+        // Your WhatsApp number
+        const whatsappNumber = "919561471054";
+
+        // Encode message and redirect to WhatsApp
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+        setSubmitted(true);
+
+        // Redirect to WhatsApp after brief success message
+        setTimeout(() => {
+            window.open(whatsappURL, "_blank");
+
+            // Reset form after redirect
+            setTimeout(() => {
+                setSubmitted(false);
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    company: "",
+                    message: ""
+                });
+            }, 2000);
+        }, 1500);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
     return (
         <section className="py-24 relative">
             <div className="container mx-auto px-4">
@@ -15,95 +72,112 @@ export const Contact = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         className="lg:col-span-2 bg-[#0a0f1a] border border-white/5 rounded-3xl p-8 md:p-12"
                     >
-                        <div className="text-center mb-12">
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                                Let's Start Your <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">AI Transformation</span>
-                            </h2>
-                            <p className="text-neutral-400">Fill out the form below and our AI experts will get back to you within 24 hours</p>
-                        </div>
+                        {!submitted ? (
+                            <>
+                                <div className="text-center mb-12">
+                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-4">
+                                        <Calendar size={18} />
+                                        <span className="text-sm font-semibold tracking-wide uppercase">Get Started Today</span>
+                                    </div>
+                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                                        Ready to Transform Your Business?
+                                    </h2>
+                                    <p className="text-neutral-400">Quick form to get you started - we'll discuss details on WhatsApp</p>
+                                </div>
 
-                        <form className="space-y-8">
-                            {/* Step 1 */}
-                            <div>
-                                <div className="flex items-center gap-3 mb-6">
-                                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-sm">1</span>
-                                    <h3 className="text-white font-semibold text-lg">Personal Information</h3>
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium text-neutral-300">Your Name *</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="Atul Nagose"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium text-neutral-300">Company *</label>
+                                            <input
+                                                type="text"
+                                                name="company"
+                                                value={formData.company}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="Your Company Name"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium text-neutral-300 flex items-center gap-2">
+                                                <Mail size={16} />
+                                                Email *
+                                            </label>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="you@company.com"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium text-neutral-300 flex items-center gap-2">
+                                                <Phone size={16} />
+                                                Phone *
+                                            </label>
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                required
+                                                placeholder="+91 98765 43210"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium text-neutral-300">Tell us about your project</label>
+                                        <textarea
+                                            rows={4}
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            placeholder="Briefly describe what you need help with..."
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
+                                        />
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg py-4 rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2 group"
+                                    >
+                                        <MessageSquare size={20} />
+                                        Continue to WhatsApp
+                                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                    <p className="text-center text-xs text-neutral-500">Budget and timeline? We'll discuss that on WhatsApp - free consultation!</p>
+                                </form>
+                            </>
+                        ) : (
+                            <div className="text-center py-24">
+                                <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <CheckCircle size={40} className="text-green-500" />
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">First Name *</label>
-                                        <input type="text" placeholder="John" className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">Last Name *</label>
-                                        <input type="text" placeholder="Doe" className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">Email *</label>
-                                        <input type="email" placeholder="john@company.com" className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">Phone *</label>
-                                        <input type="tel" placeholder="9106915561" className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" />
-                                    </div>
-                                    <div className="space-y-2 md:col-span-2">
-                                        <label className="text-sm text-neutral-400">Company *</label>
-                                        <input type="text" placeholder="Your Company Name" className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" />
-                                    </div>
-                                </div>
+                                <h3 className="text-3xl font-bold text-white mb-3">Opening WhatsApp...</h3>
+                                <p className="text-neutral-400 text-lg">Redirecting you to continue the conversation</p>
                             </div>
-
-                            {/* Step 2 */}
-                            <div>
-                                <div className="flex items-center gap-3 mb-6">
-                                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-500 text-white font-bold text-sm">2</span>
-                                    <h3 className="text-white font-semibold text-lg">Project Information</h3>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">Service Interest</label>
-                                        <select className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none">
-                                            <option>Select a service</option>
-                                            <option>AI Automation</option>
-                                            <option>Web Development</option>
-                                            <option>Mobile App Dev</option>
-                                            <option>Marketing</option>
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">Project Budget *</label>
-                                        <select className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none">
-                                            <option>Select Range</option>
-                                            <option>$5k - $10k</option>
-                                            <option>$10k - $25k</option>
-                                            <option>$25k - $50k</option>
-                                            <option>$50k+</option>
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm text-neutral-400">Timeline *</label>
-                                        <select className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none">
-                                            <option>Select Timeline</option>
-                                            <option>Less than 1 month</option>
-                                            <option>1-3 months</option>
-                                            <option>3-6 months</option>
-                                            <option>6 months+</option>
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2 md:col-span-2">
-                                        <label className="text-sm text-neutral-400">Project Details *</label>
-                                        <textarea rows={4} placeholder="Tell us about your project, challenges, and goals..." className="w-full bg-[#111624] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg py-4 rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
-                                <Send size={20} />
-                                Send Message & Start Your AI Journey
-                            </button>
-                            <p className="text-center text-xs text-neutral-500">We'll respond within 24 hours with a personalized AI strategy</p>
-                        </form>
+                        )}
                     </motion.div>
 
                     {/* Right Column: Info Cards */}
@@ -177,18 +251,34 @@ export const Contact = () => {
                             <p className="text-blue-100 text-xs mb-6">Choose your preferred way to connect with our AI experts</p>
 
                             <div className="grid grid-cols-2 gap-3 mb-6">
-                                <button className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors">
+                                <a
+                                    href="mailto:aipowereddevteam@gmail.com"
+                                    className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors"
+                                >
                                     <Mail size={14} /> Email
-                                </button>
-                                <button className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors">
+                                </a>
+                                <a
+                                    href="tel:+919561471054"
+                                    className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors"
+                                >
                                     <Phone size={14} /> Call
-                                </button>
-                                <button className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors">
+                                </a>
+                                <a
+                                    href="https://wa.me/919561471054"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors"
+                                >
                                     <MessageSquare size={14} /> WhatsApp
-                                </button>
-                                <button className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors">
+                                </a>
+                                <a
+                                    href="https://calendar.google.com/calendar/appointments/schedules/REPLACE_WITH_YOUR_SCHEDULE_ID"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-medium py-3 rounded-lg transition-colors"
+                                >
                                     <Calendar size={14} /> Demo
-                                </button>
+                                </a>
                             </div>
 
                             <div className="flex justify-center gap-4 text-[10px] text-blue-100 font-medium">

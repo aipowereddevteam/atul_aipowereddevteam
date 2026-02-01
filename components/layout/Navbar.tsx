@@ -41,7 +41,7 @@ export const Navbar = () => {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4 bg-black/50 backdrop-blur-md border-b border-white/10" : "py-6 bg-transparent"
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4 bg-black/30 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/50" : "py-6 bg-transparent"
                     }`}
                 onMouseLeave={() => setActiveDropdown(null)}
             >
@@ -114,10 +114,13 @@ export const Navbar = () => {
 
                     {/* CTA Button */}
                     <div className="hidden md:block">
-                        <button className="px-6 py-2.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors flex items-center gap-2">
+                        <Link
+                            href="#contact"
+                            className="px-6 py-2.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors flex items-center gap-2"
+                        >
                             Book Consultation
                             <ChevronDown size={16} className="-rotate-90" />
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -151,9 +154,13 @@ export const Navbar = () => {
                                 </Link>
                             ))}
                             <hr className="border-white/10" />
-                            <button className="w-full py-4 rounded-xl bg-blue-600 text-white font-bold text-lg">
+                            <Link
+                                href="#contact"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="w-full py-4 rounded-xl bg-blue-600 text-white font-bold text-lg text-center block"
+                            >
                                 Book Consultation
-                            </button>
+                            </Link>
                         </div>
                     </motion.div>
                 )}

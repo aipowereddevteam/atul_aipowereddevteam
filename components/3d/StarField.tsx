@@ -1,12 +1,12 @@
 "use client";
 import { useState, useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Float } from "@react-three/drei";
+import { Points, PointMaterial } from "@react-three/drei";
 import * as random from "maath/random";
 
 const StarBackground = (props: any) => {
     const ref: any = useRef(null);
-    const [sphere] = useState(() => random.inSphere(new Float32Array(2000), { radius: 1.2 }));
+    const [sphere] = useState(() => random.inSphere(new Float32Array(1500), { radius: 1.2 }));
 
     useFrame((state, delta) => {
         ref.current.rotation.x -= delta / 10;
@@ -28,19 +28,6 @@ const StarBackground = (props: any) => {
     );
 };
 
-const GeometricShapes = () => {
-    return (
-        <group>
-            <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-                <mesh position={[1, 0.5, 0]} scale={0.4}>
-                    <boxGeometry />
-                    <meshBasicMaterial color="#00f3ff" wireframe opacity={0.3} transparent />
-                </mesh>
-            </Float>
-        </group>
-    );
-};
-
 export default function ThreeHero() {
     return (
         <div className="w-full h-screen fixed inset-0 -z-10 bg-black">
@@ -49,7 +36,6 @@ export default function ThreeHero() {
                 <directionalLight position={[10, 10, 5]} intensity={1} />
                 <Suspense fallback={null}>
                     <StarBackground />
-                    {/* <GeometricShapes /> */}
                 </Suspense>
             </Canvas>
         </div>

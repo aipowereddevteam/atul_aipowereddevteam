@@ -23,9 +23,22 @@
   }
 }
 
+/* Premium Typography */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Smooth Scrolling Base - Let Lenis handle it */
+html {
+  scroll-behavior: auto;
 }

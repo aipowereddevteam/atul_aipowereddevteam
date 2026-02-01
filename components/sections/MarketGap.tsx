@@ -26,7 +26,7 @@ const problems = [
 
 export const MarketGap = () => {
     return (
-        <section className="py-24 bg-black relative overflow-hidden">
+        <section className="py-32 lg:py-40 bg-black relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-900/5 blur-[80px] rounded-full" />
 
@@ -53,9 +53,10 @@ export const MarketGap = () => {
                     {problems.map((item, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.2 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ delay: index * 0.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                             className="bg-[#0a0f1a] border border-white/5 p-8 rounded-3xl hover:border-white/10 transition-colors group"
                         >
                             <div className={`w-14 h-14 rounded-2xl bg-${item.color}-500/10 flex items-center justify-center text-${item.color}-500 mb-6 group-hover:scale-110 transition-transform`}>

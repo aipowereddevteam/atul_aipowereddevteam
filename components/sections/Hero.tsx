@@ -36,16 +36,17 @@ const pills = [
 
 export const Hero = () => {
     return (
-        <section className="relative min-h-screen flex flex-col justify-center items-center pt-20 px-4 overflow-hidden">
+        <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 lg:pt-40 px-6 lg:px-8 overflow-hidden">
 
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[60px] -z-10" />
 
             {/* Badge */}
             <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                 className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0a0f1a] border border-blue-500/20 mb-8 shadow-lg"
             >
                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
@@ -55,9 +56,10 @@ export const Hero = () => {
 
             {/* Headline */}
             <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
                 className="text-5xl md:text-7xl font-bold text-center leading-tight mb-6 max-w-5xl"
             >
                 Transform Your Business with <br />
@@ -68,9 +70,10 @@ export const Hero = () => {
 
             {/* Subheadline */}
             <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                 className="text-lg md:text-xl text-neutral-400 text-center max-w-2xl mb-12 leading-relaxed"
             >
                 We're a specialized AI agency that builds custom automation solutions for businesses.
@@ -79,9 +82,10 @@ export const Hero = () => {
 
             {/* Buttons */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                 className="flex flex-col sm:flex-row gap-4 mb-20"
             >
                 <button className="px-8 py-3.5 rounded-lg bg-white text-black font-bold text-base hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
@@ -97,9 +101,10 @@ export const Hero = () => {
 
             {/* Feature Pills */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                 className="flex flex-wrap justify-center gap-4"
             >
                 {pills.map((pill, index) => (
